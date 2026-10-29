@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Register | FindIt{% endblock %}
+{% block content %}
+<div class="auth-layout"><div class="auth-welcome"><p class="eyebrow">JOIN THE COMMUNITY</p><h1>A little help can make a big difference.</h1><p>Create an account to report items and help people reconnect with their belongings.</p><div class="big-symbol">✧</div></div>
+<div class="form-box"><p class="eyebrow">GET STARTED</p><h2>Create account</h2><p class="muted">Fill in the details below.</p><form method="post" class="form-stack"><label>Full name<input name="name" required placeholder="Your name"></label><label>Email address<input type="email" name="email" required placeholder="you@example.com"></label><label>Password<input type="password" name="password" minlength="6" required placeholder="At least 6 characters"></label><button class="button blue wide" type="submit">Register →</button></form><p class="form-foot">Already registered? <a href="{{ url_for('login') }}">Login</a></p></div></div>
+{% endblock %}

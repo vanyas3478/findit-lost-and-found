@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}Login | FindIt{% endblock %}
+{% block content %}
+<div class="auth-layout"><div class="auth-welcome"><p class="eyebrow">WELCOME BACK</p><h1>Let's get lost items back home.</h1><p>Sign in to report an item, check your reports, or manage the system.</p><div class="big-symbol">⌕</div></div>
+<div class="form-box"><p class="eyebrow">YOUR ACCOUNT</p><h2>Login</h2><p class="muted">Enter your account details.</p><form method="post" class="form-stack"><label>Email address<input type="email" name="email" required placeholder="you@example.com"></label><label>Password<input type="password" name="password" required placeholder="Enter password"></label><button class="button blue wide" type="submit">Login →</button></form>
+<div class="demo"><b>Demo student</b><br>student@demo.com / student123<br><b>Admin</b><br>admin@demo.com / admin123</div><p class="form-foot">No account? <a href="{{ url_for('register') }}">Register here</a></p></div></div>
+{% endblock %}

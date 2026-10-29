@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}FindIt | Lost & Found{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="navbar">
+  <a class="logo" href="{{ url_for('home') }}">⌕ Find<span>It</span></a>
+  <nav>
+    <a href="{{ url_for('home') }}">Home</a>
+    {% if session.get('user_id') %}
+      <a href="{{ url_for('report') }}">Report Item</a>
+      <a href="{{ url_for('my_reports') }}">My Reports</a>
+      {% if session.get('role') == 'admin' %}<a href="{{ url_for('admin') }}">Admin Panel</a>{% endif %}
+      <a class="nav-btn" href="{{ url_for('logout') }}">Logout</a>
+    {% else %}
+      <a href="{{ url_for('login') }}">Login</a>
+      <a class="nav-btn" href="{{ url_for('register') }}">Register</a>
+    {% endif %}
+  </nav>
+</header>
+<main class="container">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}<div class="messages">{% for message in messages %}<div class="message">{{ message }}</div>{% endfor %}</div>{% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<footer><b>FindIt</b> — Lost & Found Management System <span>DBMS College Project · Works offline</span></footer>
+</body>
+</html>

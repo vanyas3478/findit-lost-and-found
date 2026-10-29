@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}My Reports | FindIt{% endblock %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">YOUR ACCOUNT</p><h1>My reports</h1><p>Items you have reported.</p></div>
+<div class="form-box"><div class="table-scroll"><table><thead><tr><th>Item</th><th>Type</th><th>Date</th><th>Status</th><th>Details</th></tr></thead><tbody>{% for item in items %}<tr><td>{{ item.title }}</td><td>{{ item.item_type }}</td><td>{{ item.event_date }}</td><td>{{ item.status }}</td><td><a href="{{ url_for('item_details', item_id=item.id) }}">View</a></td></tr>{% else %}<tr><td colspan="5">No reports yet. Click Report Item to add one.</td></tr>{% endfor %}</tbody></table></div></div>
+{% endblock %}

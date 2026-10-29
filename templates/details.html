@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block title %}{{ item.title }} | FindIt{% endblock %}
+{% block content %}
+<p class="breadcrumb"><a href="{{ url_for('home') }}">Home</a> / Item details</p>
+<div class="details-layout"><section class="details-card"><div class="detail-art {{ item.item_type|lower }}">✧</div><div class="detail-body"><div class="item-top"><span class="tag {{ item.item_type|lower }}">{{ item.item_type }}</span><span class="category">{{ item.category }}</span><span class="status">{{ item.status }}</span></div><h1>{{ item.title }}</h1><p>{{ item.description }}</p><div class="detail-facts"><div><small>LOCATION</small><b>⌖ {{ item.location }}</b></div><div><small>DATE</small><b>{{ item.event_date }}</b></div><div><small>CONTACT</small><b>{{ item.contact }}</b></div></div></div></section>
+<aside class="form-box claim-box"><p class="eyebrow">THINK THIS IS YOURS?</p><h2>Submit a claim</h2><p class="muted">Explain how you can identify the item.</p><form method="post" action="{{ url_for('claim', item_id=item.id) }}" class="form-stack"><label>Your message<textarea name="message" rows="4" required placeholder="Describe identifying details..."></textarea></label><button class="button blue wide" type="submit">Submit claim</button></form><p class="small-note">You must be logged in. The administrator can review claims.</p></aside></div>
+{% endblock %}

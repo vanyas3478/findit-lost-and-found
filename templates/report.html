@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block title %}Report an Item | FindIt{% endblock %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">HELP RECONNECT AN ITEM</p><h1>Report an item</h1><p>Enter the details below to create a lost or found report.</p></div>
+<div class="report-layout"><aside class="tip-box"><div class="tip-icon">✧</div><h3>Make your report helpful</h3><p>Add the correct location, date, and a clear description. Do not publish sensitive private information.</p><div class="tip"><b>Tip</b><br>Example location: College Library, Block A.</div></aside>
+<form class="form-box report-form" method="post"><h2>Item information</h2>
+<label>Report type<select name="item_type" required><option value="Lost">I lost an item</option><option value="Found">I found an item</option></select></label>
+<label>Item name<input name="title" required maxlength="120" placeholder="e.g. Blue college ID card"></label>
+<label>Category<select name="category" required>{% for category in categories %}<option value="{{ category }}">{{ category }}</option>{% endfor %}</select></label>
+<label>Description<textarea name="description" required rows="3" placeholder="Colour, brand, special details..."></textarea></label>
+<div class="two"><label>Location<input name="location" required placeholder="Where was it lost/found?"></label><label>Date<input type="date" name="event_date" required></label></div>
+<label>Contact information<input name="contact" required placeholder="Use demo email for testing"></label>
+<button class="button blue wide" type="submit">Submit report →</button></form></div>
+{% endblock %}

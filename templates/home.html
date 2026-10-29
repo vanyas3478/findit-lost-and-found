@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}FindIt | Home{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-text">
+    <p class="eyebrow">LOST SOMETHING? FOUND SOMETHING?</p>
+    <h1>Find what matters.<br><span>Help someone smile.</span></h1>
+    <p class="intro">A simple community website to report missing belongings and reconnect found items with their owners.</p>
+    <div class="hero-buttons"><a class="button white" href="{{ url_for('report') }}">＋ Report an Item</a><a class="underlink" href="#items">Browse listings ↓</a></div>
+  </div>
+  <div class="hero-picture" aria-hidden="true"><div class="circle c1"></div><div class="circle c2"></div><div class="object-card id-card"><span>▣</span><div><b>Student ID</b><small>Lost near library</small></div></div><div class="object-card keys"><span>⚿</span><div><b>Keys</b><small>Found near canteen</small></div></div><div class="magnifier">⌕</div></div>
+</section>
+<section class="stats">
+  <div><span class="stat-icon">▤</span><div><strong>{{ total }}</strong><small>Open reports</small></div></div>
+  <div><span class="stat-icon pink">⌕</span><div><strong>{{ lost }}</strong><small>Lost items</small></div></div>
+  <div><span class="stat-icon green">✓</span><div><strong>{{ found }}</strong><small>Found items</small></div></div>
+</section>
+<section id="items" class="section-title"><div><p class="eyebrow">COMMUNITY LISTINGS</p><h2>Recent reports</h2><p>Search the listings to find a possible match.</p></div><a class="button blue" href="{{ url_for('report') }}">＋ Add a Report</a></section>
+<form class="search-form" method="get" action="{{ url_for('home') }}">
+  <input type="text" name="search" placeholder="Search name, description or location..." value="{{ search_text }}">
+  <select name="type"><option value="">All reports</option><option value="Lost" {% if item_type == 'Lost' %}selected{% endif %}>Lost</option><option value="Found" {% if item_type == 'Found' %}selected{% endif %}>Found</option></select>
+  <button class="button blue" type="submit">Search</button>
+</form>
+{% if items %}
+<div class="cards">
+{% for item in items %}
+  <article class="item-card">
+    <div class="item-top"><span class="tag {{ item.item_type|lower }}">{{ item.item_type }}</span><span class="category">{{ item.category }}</span></div>
+    <div class="item-picture {{ item.item_type|lower }}">
+      {% if item.category == 'ID Card' %}▣{% elif item.category == 'Electronics' %}⌁{% elif item.category == 'Wallet' %}▰{% elif item.category == 'Books' %}▤{% elif item.category == 'Keys' %}⚿{% elif item.category == 'Clothing' %}♧{% elif item.category == 'Bag' %}▱{% else %}✧{% endif %}
+    </div>
+    <div class="item-body"><h3>{{ item.title }}</h3><p>{{ item.description }}</p><div class="meta">⌖ {{ item.location }}<br>◷ {{ item.event_date }}</div><a class="details-link" href="{{ url_for('item_details', item_id=item.id) }}">View details →</a></div>
+  </article>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty"><h3>No items found</h3><p>Try another search or submit a new report.</p><a class="button blue" href="{{ url_for('report') }}">Report an item</a></div>
+{% endif %}
+<section class="bottom-banner"><div><p class="eyebrow">BE SOMEONE'S GOOD NEWS</p><h2>Found something? Help return it.</h2><p>Share a report so the owner has a chance to find it.</p></div><a class="button white" href="{{ url_for('report') }}">Report a found item →</a></section>
+{% endblock %}
